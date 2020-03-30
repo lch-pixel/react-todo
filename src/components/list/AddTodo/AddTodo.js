@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { addTodo } from "../../../redux/todo-list/todoSlice";
-import { connect } from "react-redux";
 import { FormControl, Row, Container, Col, Button } from "react-bootstrap";
 import styled from "styled-components";
 
@@ -10,7 +8,7 @@ const Label = styled.label`
   font-weight: bold;
 `;
 
-const AddTodo = ({ dispatch }) => {
+const AddTodo = ({ addTodo }) => {
   const [input, setInput] = useState("");
 
   return (
@@ -37,7 +35,7 @@ const AddTodo = ({ dispatch }) => {
               if (!input.trim()) {
                 return;
               }
-              dispatch(addTodo(input));
+              addTodo(input);
               setInput("");
             }}
           >
@@ -49,4 +47,4 @@ const AddTodo = ({ dispatch }) => {
   );
 };
 
-export default connect()(AddTodo);
+export default AddTodo;

@@ -11,16 +11,24 @@ const Item = styled(ListGroup.Item)`
 const Text = styled.span`
   display: table-cell;
   vertical-align: middle;
+  text-decoration: ${props => (props.isCompleted ? "line-through" : "none")};
 `;
 
-const TodoItem = ({ item }) => {
+const IconRapper = styled.span`
+  display: ${props => (props.isCompleted ? "none" : "inline-block")};
+  float: ${props => props.float || "right"};
+`;
+
+const TodoItem = ({ toggleTodo, deleteTodo, isCompleted, text }) => {
   return (
     <Item>
-      <Text>
-        {item.isCompleted ? <del>{item.children}</del> : item.children}
-      </Text>
-      <TimesIcon bc="#d9534f" />
-      <CheckIcon bc="#5bb85d" />
+      <Text isCompleted={isCompleted}>{text}</Text>
+      <IconRapper onClick={deleteTodo}>
+        <TimesIcon bc="#d9534f" />
+      </IconRapper>
+      <IconRapper onClick={toggleTodo} isCompleted={isCompleted}>
+        <CheckIcon bc="#5bb85d" isCompleted={isCompleted} />
+      </IconRapper>
     </Item>
   );
 };
